@@ -9,19 +9,19 @@ class Customarrow extends HTMLElement {
     this.peakCollapse = 0;
     this.unClosed = false;
     this.scaleFactor = 1;
-    //this.storedTailLength;
+    this.storedTailLength = this.tailLength;
   }
 
   static get observedAttributes() {
     return [
-      "length",
-      "width", // <-- varattu!
+      "len",
+      "wid", // <-- width on varattu!
       "tail-l",
       "tail-w",
       "peak-l",
       "rot",
       "tail-cont",
-      "peak-collapse",
+      "peak-coll",
       "unclosed",
       "scale"
     ];
@@ -33,29 +33,31 @@ class Customarrow extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "width") {
+    if (name === "wid") {
       //console.log("width:" + newValue);
       this.aWidth = parseFloat(newValue); //vai Number?
-    } else if (name === "length") {
+    } else if (name === "len") {
       //console.log("length:" + newValue);
       this.aLength = parseFloat(newValue); //vai Number?
     } else if (name === "tail-w") {
-      this.tailWidth = Number(newValue) / 100;
+      this.tailWidth = parseFloat(newValue) / 100;
     } else if (name === "tail-l") {
-      this.tailLength = Number(newValue) / 100;
+      this.tailLength = parseFloat(newValue) / 100;
       this.storedTailLength = this.tailLength;
     } else if (name === "rot") {
-      let rot = Number(newValue);
+      let rot = parseFloat(newValue);
       if (!isNaN(rot)) {
         this.rotation = rot < 0 ? rot + 360 : rot;
       } else {
         this.rotation = 0;
       }
     } else if (name === "tail-cont") {
-      this.tailContraction = Number(newValue) / 100;
-    } else if (name === "peak-collapse") {
-      this.peakCollapse = Number(newValue) / 100;
+      this.tailContraction = parseFloat(newValue) / 100;
+    } else if (name === "peak-coll") {
+      this.peakCollapse = parseFloat(newValue) / 100;
+      console.log(this.peakCollapse);
     } else if (name === "unclosed") {
+      console.log(typeof newValue);
       if (newValue === "false") {
         this.unClosed = false;
       } else {
@@ -65,7 +67,7 @@ class Customarrow extends HTMLElement {
       this.peakLength = parseFloat(newValue);
       console.log("peakLength: " + this.peakLength);
     } else if (name === "scale") {
-      this.scaleFactor = Number(newValue) / 100;
+      this.scaleFactor = parseFloat(newValue) / 100;
       //console.log(this.peakLength);
     }
 
