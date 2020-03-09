@@ -3,7 +3,6 @@ class Customarrow extends HTMLElement {
     super();
     this.tailWidth = 0.5;
     this.tailLength = 0.5;
-    this.initRotation = 0;
     this.rotation = 0;
     this.tailContraction = 0;
     this.peakCollapse = 0;
@@ -14,8 +13,8 @@ class Customarrow extends HTMLElement {
 
   static get observedAttributes() {
     return [
-      "len",
-      "wid", // <-- width on varattu!
+      "l",
+      "w", // <-- width on varattu!
       "tail-l",
       "tail-w",
       "peak-l",
@@ -33,10 +32,10 @@ class Customarrow extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "wid") {
+    if (name === "w") {
       //console.log("width:" + newValue);
       this.aWidth = parseFloat(newValue); //vai Number?
-    } else if (name === "len") {
+    } else if (name === "l") {
       //console.log("length:" + newValue);
       this.aLength = parseFloat(newValue); //vai Number?
     } else if (name === "tail-w") {
@@ -88,7 +87,7 @@ class Customarrow extends HTMLElement {
   _render() {
     this.appendChild(this._generateArrow());
     this.arrow = this.querySelector("#arrow");
-    this._setHeightAndWidth();
+    this._setStyle();
   }
 
   connectedCallback() {
@@ -119,25 +118,14 @@ class Customarrow extends HTMLElement {
     this.observer.observe(this, config);
   }
 
-  _setHeightAndWidth() {
-    let totalRotation = this.initRotation + this.rotation;
-    let piInDegrees = 180;
-    let radRotation =
-      totalRotation < piInDegrees
-        ? (totalRotation * Math.PI) / piInDegrees
-        : totalRotation < piInDegrees * 2
-        ? (totalRotation * Math.PI) / piInDegrees - Math.PI
-        : totalRotation < piInDegrees * 3
-        ? (totalRotation * Math.PI) / piInDegrees - Math.PI * 2
-        : (totalRotation * Math.PI) / piInDegrees - Math.PI * 3;
-
-    this.arrow.style.transform = "rotate(" + totalRotation + "deg)";
+  _setStyle() {
+    this.arrow.style.transform = "rotate(" + this.rotation + "deg)";
     //this.arrow.style.transformOrigin = "0% 50%";
     this.arrow.style.position = "absolute";
     let styleDisplay = window.getComputedStyle(this).display;
     //console.log(styleDisplay);
     if (styleDisplay !== "flex" && styleDisplay !== "inline-flex") {
-      console.log("Setting display style");
+      //console.log("Setting display style");
       this.style.display = "flex";
     }
     this.style.justifyContent = "center";
