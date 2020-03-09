@@ -16,7 +16,6 @@
   let unclosed = false;
   let styleHeight = 100;
   let styleWidth = 100;
-  let attributeDimensionsDisabled = false;
   let elementRotation = 0;
   let absPeakLengthEnabled = false;
   let styleScale = 1;
@@ -24,6 +23,15 @@
 
   function changeAngle(angle) {
     rotation = rotation + angle;
+  }
+
+  function checkBoxHandler(event) {
+    let elem = document.getElementById("peak_length");
+    if(event.target.checked === true) {
+      elem.style.opacity = 1;
+    } else {
+      elem.style.opacity = 0.3;
+    }
   }
 
   function preset_1() {
@@ -214,6 +222,24 @@
 </script>
 
 <style>
+
+  main {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .html_example {
+    font-family: "Courier New", Courier, monospace;
+    font-stretch: extra-expanded;
+    display:inline-block;
+    background-color: #d8edf3;
+    padding: 10px;
+  }
+
+  .bold_text {
+  font-weight: bold;
+  margin-bottom: 5px;
+  }
+
   custom-arrow {
     background-color: lightgray;
     stroke-linejoin: round;
@@ -224,8 +250,7 @@
     stroke-linecap: round;
     /*transform:rotate(90deg);*/
     display: inline-flex;
-    margin-left: 100px;
-    margin-bottom: 150px;
+    margin: 50px;
   }
   #container {
     border-radius: 50%;
@@ -239,6 +264,7 @@
   .controls_container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
   }
   .controls_half {
     margin: 10px;
@@ -246,24 +272,35 @@
   .control {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #ebf1f9;
     padding: 5px;
     box-shadow: 4px 4px 4px lightgrey;
   }
-
   .control_style {
     background-color: #ebfff9;
   }
-
+  .together {
+    display: flex;
+    align-items: center;
+  }
   .control_title {
     font-size: 18px;
     font-weight: bold;
     justify-content: center;
   }
-
+  #peak_length {
+    opacity: 0.3;
+  }
   button {
     display: block;
     margin: 10px;
+  }
+  .custom_container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 </style>
 
@@ -304,10 +341,12 @@
       </div>
 
       <div class="control">
-        <input type="checkbox" bind:checked={absPeakLengthEnabled} />
-        peak length
-        <input type="range" min="0" max="200" bind:value={peakLength} />
-        <input type="text" bind:value={peakLength} size="1" />
+        <input type="checkbox" on:change={checkBoxHandler} bind:checked={absPeakLengthEnabled} />
+        <div class="together" id="peak_length">
+          peak length
+          <input type="range" min="0" max="200" bind:value={peakLength} />
+          <input type="text" bind:value={peakLength} size="1" />
+        </div>
       </div>
 
       <div class="control">
@@ -329,8 +368,10 @@
       </div>
 
       <div class="control">
-        unclosed
-        <input type="checkbox" bind:checked={unclosed} />
+        <div class="together">
+          <input type="checkbox" bind:checked={unclosed} />
+          unclosed
+        </div>
       </div>
 
     </div>
@@ -420,20 +461,27 @@
       <button type="button" on:click={() => changeAngle(-10)}>-10</button-->
     </div>
   </div>
+  <div class="custom_container">
+    <custom-arrow
+      l={length}
+      w={width}
+      tail-l={tailLength}
+      tail-w={tailWidth}
+      rot={rotation}
+      tail-cont={contraction}
+      peak-coll={peakCollapse}
+      peak-l={absPeakLengthEnabled ? peakLength : ''}
+      {unclosed}
+      scale={scaleFactor}
+      style="stroke-width: {strokeWidth}px; stroke-linejoin: {strokeLinejoin}; stroke: {strokeColor}; fill: {fillColor};
+      height: {styleHeight}px; width: {styleWidth}px; border-radius: {borderRadius}%; transform: rotate({elementRotation}deg); transform:scale({styleScale},{styleScale}); background-color:{bgColor};">
+    </custom-arrow>
 
-  <custom-arrow
-    l={attributeDimensionsDisabled ? '' : length}
-    w={attributeDimensionsDisabled ? '' : width}
-    tail-l={tailLength}
-    tail-w={tailWidth}
-    rot={rotation}
-    tail-cont={contraction}
-    peak-coll={peakCollapse}
-    peak-l={absPeakLengthEnabled ? peakLength : ''}
-    {unclosed}
-    scale={scaleFactor}
-    style="stroke-width: {strokeWidth}px; stroke-linejoin: {strokeLinejoin}; stroke: {strokeColor}; fill: {fillColor};
-    height: {styleHeight}px; width: {styleWidth}px; border-radius: {borderRadius}%; transform: rotate({elementRotation}deg); transform:scale({styleScale},{styleScale}); background-color:{bgColor};">
-  </custom-arrow>
-
+    <div class="html_example">
+    <div class="bold_text">HTML tag with all attributes:</div>
+      {`<custom-arrow l=${length} w=${width} tail-l=${tailLength} tail-w=${tailWidth} rot=${rotation} tail-cont=${contraction}`}
+    <br>
+      {`peak-coll='${peakCollapse}' peak-l=${absPeakLengthEnabled ? peakLength : '""'} unclosed=${unclosed} scale=${scaleFactor}> </custom-arrow>`}
+    </div>
+  </div>
 </main>
