@@ -311,27 +311,39 @@
       <div class="control control_title">Element attributes</div>
 
       <div class="control">
-        length
+        arrow length
         <input type="range" min="0" max="1000" bind:value={length} />
-        <input type="text" bind:value={length} size="1" />
+        <div class="together">
+          <input type="text" bind:value={length} size="1" />
+          px
+        </div>
       </div>
 
       <div class="control">
-        width
+        arrow width
         <input type="range" min="0" max="1000" bind:value={width} />
-        <input type="text" bind:value={width} size="1" />
+        <div class="together">
+          <input type="text" bind:value={width} size="1" />
+          px
+        </div>
       </div>
 
       <div class="control">
         tail length
         <input type="range" min="0" max="100" bind:value={tailLength} />
-        <input type="text" bind:value={tailLength} size="1" />
+        <div class="together">
+          <input type="text" bind:value={tailLength} size="1" />
+          %
+        </div>
       </div>
 
       <div class="control">
         tail width
         <input type="range" min="0" max="100" bind:value={tailWidth} />
-        <input type="text" bind:value={tailWidth} size="1" />
+        <div class="together">
+          <input type="text" bind:value={tailWidth} size="1" />
+          %
+        </div>
       </div>
 
       <div class="control">
@@ -345,20 +357,29 @@
         <div class="together" id="peak_length">
           peak length
           <input type="range" min="0" max="200" bind:value={peakLength} />
-          <input type="text" bind:value={peakLength} size="1" />
+          <div class="together">
+            <input type="text" bind:value={peakLength} size="1" />
+            px
+          </div>
         </div>
       </div>
 
       <div class="control">
         tail contraction
         <input type="range" min="0" max="100" bind:value={contraction} />
-        <input type="text" bind:value={contraction} size="1" />
+        <div class="together">
+          <input type="text" bind:value={contraction} size="1" />
+          %
+        </div>
       </div>
 
       <div class="control">
         peak collapse
         <input type="range" min="0" max="100" bind:value={peakCollapse} />
-        <input type="text" bind:value={peakCollapse} size="1" />
+        <div class="together">
+          <input type="text" bind:value={peakCollapse} size="1" />
+          %
+        </div>
       </div>
 
       <div class="control">
@@ -455,10 +476,6 @@
       <button type="button" on:click={preset_11}>Preset 11</button>
       <button type="button" on:click={preset_12}>Preset 12</button>
       <button type="button" on:click={reset}>Reset</button>
-      <!--button type="button" on:click={() => changeAngle(1)}>+1</button>
-      <button type="button" on:click={() => changeAngle(-1)}>-1</button>
-      <button type="button" on:click={() => changeAngle(10)}>+10</button>
-      <button type="button" on:click={() => changeAngle(-10)}>-10</button-->
     </div>
   </div>
   <div class="custom_container">
@@ -481,7 +498,7 @@
     <div class="bold_text">HTML tag with all attributes:</div>
       {`<custom-arrow l=${length} w=${width} tail-l=${tailLength} tail-w=${tailWidth} rot=${rotation} tail-cont=${contraction}`}
     <br>
-      {`peak-coll='${peakCollapse}' peak-l=${absPeakLengthEnabled ? peakLength : '""'} unclosed=${unclosed} scale=${scaleFactor}> </custom-arrow>`}
+      {`peak-coll=${peakCollapse} peak-l=${absPeakLengthEnabled ? peakLength : '""'} unclosed=${unclosed} scale=${scaleFactor}> </custom-arrow>`}
     </div>
   </div>
 </main>
