@@ -143,12 +143,14 @@ class Customarrow extends HTMLElement {
   }
 
   _generateArrow() {
+
     this.strokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth);
-    let strokeWidthFactorY = 1 - (0.5 * (this.strokeWidth - 1)) / (this.aWidth / 2);
-    let strokeWidthFactorX = 1 - ((this.strokeWidth - 1) * this.tailLength) / this.aLength;
-    let tailTopLeftY = 0.5 * (this.strokeWidth - 1) + (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY;
+    let strokeWidthCompensation = this.strokeWidth * 0.5;
+    let strokeWidthFactorY = 1 - (strokeWidthCompensation) / (this.aWidth / 2);
+    let strokeWidthFactorX = 1 - (this.strokeWidth * this.tailLength) / this.aLength;
+    let tailTopLeftY = strokeWidthCompensation + (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY;
     let tailBottomLeftY =
-      this.aWidth - (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY - (this.strokeWidth - 1) * 0.5;
+      this.aWidth - (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY - strokeWidthCompensation;
     let distanceBetweenTailLeftYs = tailBottomLeftY - tailTopLeftY;
     let tailTopRightY = tailTopLeftY + 0.5 * distanceBetweenTailLeftYs * this.tailContraction;
     let tailBottomRightY = tailBottomLeftY - 0.5 * distanceBetweenTailLeftYs * this.tailContraction;
@@ -162,19 +164,19 @@ class Customarrow extends HTMLElement {
       );
     let cathetus = Math.tan(angle) * tailTopRightY;
 
-    let coord_1_x = 1 + (this.strokeWidth - 1) * 0.5;
+    let coord_1_x = strokeWidthCompensation;
     let coord_1_y = tailTopLeftY;
-    let coord_2_x = tailRightX + (this.strokeWidth - 1) * 0.5 + this.peakCollapse * (cathetus - this.strokeWidth);
+    let coord_2_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.strokeWidth);
     let coord_2_y = tailTopRightY;
-    let coord_3_x = tailRightX + (this.strokeWidth - 1) * 0.5;
-    let coord_3_y = (this.strokeWidth - 1) * 0.5;
-    let coord_4_x = this.aLength - (this.strokeWidth - 1) * 0.5;
+    let coord_3_x = tailRightX + strokeWidthCompensation;
+    let coord_3_y = strokeWidthCompensation;
+    let coord_4_x = this.aLength - strokeWidthCompensation;
     let coord_4_y = this.aWidth / 2;
-    let coord_5_x = tailRightX + (this.strokeWidth - 1) * 0.5;
-    let coord_5_y = this.aWidth - (this.strokeWidth - 1) * 0.5;
-    let coord_6_x = tailRightX + (this.strokeWidth - 1) * 0.5 + this.peakCollapse * (cathetus - this.strokeWidth);
+    let coord_5_x = tailRightX + strokeWidthCompensation;
+    let coord_5_y = this.aWidth - strokeWidthCompensation;
+    let coord_6_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.strokeWidth);
     let coord_6_y = tailBottomRightY;
-    let coord_7_x = 1 + (this.strokeWidth - 1) * 0.5;
+    let coord_7_x = strokeWidthCompensation;
     let coord_7_y = tailBottomLeftY;
 
     let uri = "http://www.w3.org/2000/svg";
