@@ -9,20 +9,19 @@ class Customarrow extends HTMLElement {
     this.peakCollapse = 0;
     this.unClosed = false;
     this.scaleFactor = 1;
-    this.dimensionsAsAttributes = false;
+    //this.storedTailLength;
   }
 
   static get observedAttributes() {
     return [
       "length",
-      "width",
+      "width", // <-- varattu!
       "tail-l",
       "tail-w",
       "peak-l",
       "rot",
       "tail-cont",
       "peak-collapse",
-      "direction",
       "unclosed",
       "scale"
     ];
@@ -35,15 +34,16 @@ class Customarrow extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "width") {
-      console.log("width:" + newValue);
-      this.aWidth = parseFloat(newValue);
+      //console.log("width:" + newValue);
+      this.aWidth = parseFloat(newValue); //vai Number?
     } else if (name === "length") {
-      console.log("length:" + newValue);
-      this.aLength = parseFloat(newValue);
+      //console.log("length:" + newValue);
+      this.aLength = parseFloat(newValue); //vai Number?
     } else if (name === "tail-w") {
       this.tailWidth = Number(newValue) / 100;
     } else if (name === "tail-l") {
       this.tailLength = Number(newValue) / 100;
+      this.storedTailLength = this.tailLength;
     } else if (name === "rot") {
       let rot = Number(newValue);
       if (!isNaN(rot)) {
@@ -55,17 +55,6 @@ class Customarrow extends HTMLElement {
       this.tailContraction = Number(newValue) / 100;
     } else if (name === "peak-collapse") {
       this.peakCollapse = Number(newValue) / 100;
-    } else if (name === "direction") {
-      console.log("direction!");
-      if (newValue === "right") {
-        this.initRotation = 0;
-      } else if (newValue === "down") {
-        this.initRotation = 90;
-      } else if (newValue === "left") {
-        this.initRotation = 180;
-      } else if (newValue === "up") {
-        this.initRotation = 270;
-      }
     } else if (name === "unclosed") {
       if (newValue === "false") {
         this.unClosed = false;
@@ -73,19 +62,17 @@ class Customarrow extends HTMLElement {
         this.unClosed = true;
       }
     } else if (name === "peak-l") {
-      this.peakLength = Number(newValue);
-      console.log(this.peakLength);
+      this.peakLength = parseFloat(newValue);
+      console.log("peakLength: " + this.peakLength);
     } else if (name === "scale") {
       this.scaleFactor = Number(newValue) / 100;
-      console.log(this.peakLength);
+      //console.log(this.peakLength);
     }
 
-    if ( (name === "width" || name === "length") ) {
-      if( !isNaN(this.aLength) && !isNaN(this.aWidth) ) {
-        this.dimensionsAsAttributes = true;
-      } else {
-        this.dimensionsAsAttributes = false;
-      }
+    if (!isNaN(this.peakLength)) {
+      this.tailLength = 1 - this.peakLength / this.aLength;
+    } else {
+      this.tailLength = this.storedTailLength;
     }
 
     if (!this.arrow) {
@@ -97,8 +84,6 @@ class Customarrow extends HTMLElement {
   }
 
   _render() {
-    console.log("dimensionsAsAttributes: " + this.dimensionsAsAttributes);
-    this._getHeightAndWidthFromCss();
     this.appendChild(this._generateArrow());
     this.arrow = this.querySelector("#arrow");
     this._setHeightAndWidth();
@@ -114,13 +99,8 @@ class Customarrow extends HTMLElement {
     const callback = function(mutationsList, observer, ctx) {
       for (let mutation of mutationsList) {
         if (mutation.type === "attributes") {
-          console.log("callback: ");
-          console.log(ctx.style.width);
-          console.log(ctx.style.height);
           if (
-            ctx.strokeWidth !== parseFloat(window.getComputedStyle(ctx).strokeWidth) ||
-            (ctx.w !== ctx.style.width && !ctx.dimensionsAsAttributes) ||
-            (ctx.h !== ctx.style.height && !ctx.dimensionsAsAttributes)
+            ctx.strokeWidth !== parseFloat(window.getComputedStyle(ctx).strokeWidth)
           ) {
             console.log("re-rendering");
             ctx.removeChild(ctx.querySelector("svg"));
@@ -137,30 +117,7 @@ class Customarrow extends HTMLElement {
     this.observer.observe(this, config);
   }
 
-  _getHeightAndWidthFromCss() {
-    if (!this.dimensionsAsAttributes) {
-      if (this.initRotation === 0 || this.initRotation === 180) {
-        this.aLength = parseFloat(this.style.width);
-        this.aWidth = parseFloat(this.style.height);
-      } else {
-        this.aLength = parseFloat(this.style.height);
-        this.aWidth = parseFloat(this.style.width);
-      }
-      this.w = this.style.width;
-      this.h = this.style.height;
-    }
-  }
-
   _setHeightAndWidth() {
-    if (!this.dimensionsAsAttributes) {
-      if (this.initRotation === 0 || this.initRotation === 180) {
-        this.aLength = parseFloat(this.style.width);
-        this.aWidth = parseFloat(this.style.height);
-      } else {
-        this.aLength = parseFloat(this.style.height);
-        this.aWidth = parseFloat(this.style.width);
-      }
-    }
     let totalRotation = this.initRotation + this.rotation;
     let piInDegrees = 180;
     let radRotation =
@@ -171,39 +128,21 @@ class Customarrow extends HTMLElement {
         : totalRotation < piInDegrees * 3
         ? (totalRotation * Math.PI) / piInDegrees - Math.PI * 2
         : (totalRotation * Math.PI) / piInDegrees - Math.PI * 3;
-    let cathetus = Math.sqrt(Math.pow(this.aLength, 2) + Math.pow(this.aWidth, 2));
-    let angle = Math.atan2(this.aLength, this.aWidth);
-    let rotatedWidth;
-    let rotatedHeight;
-    if (radRotation <= Math.PI / 2) {
-      rotatedWidth = (Math.sin(Math.PI - (radRotation + angle)) * cathetus) / 2;
-      rotatedHeight = (Math.sin(radRotation + (Math.PI / 2 - angle)) * cathetus) / 2;
-    } else {
-      rotatedWidth = (Math.sin(radRotation - angle) * cathetus) / 2;
-      rotatedHeight = (Math.cos(radRotation - Math.PI + angle) * cathetus) / 2;
-    }
 
     this.arrow.style.transform = "rotate(" + totalRotation + "deg)";
+    //this.arrow.style.transformOrigin = "0% 50%";
     this.arrow.style.position = "absolute";
     let styleDisplay = window.getComputedStyle(this).display;
-    console.log(styleDisplay);
+    //console.log(styleDisplay);
     if (styleDisplay !== "flex" && styleDisplay !== "inline-flex") {
       console.log("Setting display style");
       this.style.display = "flex";
     }
     this.style.justifyContent = "center";
     this.style.alignItems = "center";
-    if (this.dimensionsAsAttributes) {
-      this.style.width = 2 * rotatedWidth + "px";
-      this.style.height = 2 * rotatedHeight + "px";
-    }
   }
 
   _generateArrow() {
-    if (!isNaN(this.peakLength) && this.peakLength > 0) {
-      this.tailLength = 1 - this.peakLength / this.aLength;
-    }
-
     this.strokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth);
     let strokeWidthFactorY = 1 - (0.5 * (this.strokeWidth - 1)) / (this.aWidth / 2);
     let strokeWidthFactorX = 1 - ((this.strokeWidth - 1) * this.tailLength) / this.aLength;
