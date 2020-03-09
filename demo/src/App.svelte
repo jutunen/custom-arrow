@@ -6,8 +6,9 @@
   let rotation = 0;
   let contraction = 0;
   let strokeWidth = 1;
-  let strokeColor = "black";
-  let fillColor = "red";
+  let strokeColor = "#000000";
+  let fillColor = "#ff0000";
+  let bgColor = "#d3d3d3";// "lightgray";
   let peakCollapse = 0;
   let strokeLinejoin = "round";
   let peakLength = 0;
@@ -50,7 +51,6 @@
     strokeLinejoin = "round";
     styleWidth = 880;
     styleHeight = 430;
-
   }
 
   function preset_3() {
@@ -210,27 +210,6 @@
     strokeLinejoin = "round";
   }
 
-  function handleAttributeDimensions(e) {
-    console.log(e.target.checked);
-    let el = document.getElementById("attribute_dimensions");
-    let i_1 = document.getElementById("1st");
-    let i_2 = document.getElementById("2nd");
-    let i_3 = document.getElementById("3rd");
-    let i_4 = document.getElementById("4th");
-    if(e.target.checked) {
-      el.style.opacity = 0.3;
-      i_1.disabled = true;
-      i_2.disabled = true;
-      i_3.disabled = true;
-      i_4.disabled = true;
-    } else {
-      el.style.opacity = 1;
-      i_1.disabled = false;
-      i_2.disabled = false;
-      i_3.disabled = false;
-      i_4.disabled = false;
-    }
-  }
 </script>
 
 <style>
@@ -294,22 +273,15 @@
       <div class="control control_title">Element attributes</div>
 
       <div class="control">
-        <input type="checkbox" on:change={handleAttributeDimensions} bind:checked={attributeDimensionsDisabled} />
-        do not define length and width
+        length
+        <input type="range" min="0" max="1000" bind:value={length} />
+        <input type="text" bind:value={length} size="1" />
       </div>
 
-      <div id="attribute_dimensions">
-        <div class="control">
-          length
-          <input id="1st" type="range" min="0" max="1000" bind:value={length} />
-          <input id="2nd" type="text" bind:value={length} size="1" />
-        </div>
-
-        <div class="control">
-          width
-          <input id="3rd" type="range" min="0" max="1000" bind:value={width} />
-          <input id="4th" type="text" bind:value={width} size="1" />
-        </div>
+      <div class="control">
+        width
+        <input type="range" min="0" max="1000" bind:value={width} />
+        <input type="text" bind:value={width} size="1" />
       </div>
 
       <div class="control">
@@ -349,9 +321,6 @@
         <input type="text" bind:value={peakCollapse} size="1" />
       </div>
 
-    </div>
-    <div class="controls_half">
-
       <div class="control">
         scale %
         <input type="range" min="0" max="200" bind:value={scaleFactor} />
@@ -363,6 +332,8 @@
         <input type="checkbox" bind:checked={unclosed} />
       </div>
 
+    </div>
+    <div class="controls_half">
       <div class="control control_style control_title">Element style</div>
 
       <div class="control control_style">
@@ -379,6 +350,11 @@
       <div class="control control_style">
         fill color
         <input type="color" bind:value={fillColor} />
+      </div>
+
+      <div class="control control_style">
+        background color
+        <input type="color" bind:value={bgColor} />
       </div>
 
       <div class="control control_style">
@@ -450,7 +426,7 @@
     {unclosed}
     scale={scaleFactor}
     style="stroke-width: {strokeWidth}px; stroke-linejoin: {strokeLinejoin}; stroke: {strokeColor}; fill: {fillColor};
-    height: {styleHeight}px; width: {styleWidth}px; border-radius: 0%; transform: rotate({elementRotation}deg); transform:scale({styleScale/100},{styleScale/100});">
+    height: {styleHeight}px; width: {styleWidth}px; border-radius: 0%; transform: rotate({elementRotation}deg); transform:scale({styleScale/100},{styleScale/100}); background-color:{bgColor};">
   </custom-arrow>
 
 </main>
