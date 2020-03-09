@@ -1,8 +1,8 @@
 <script>
   let length = 125;
   let width = 125;
-  let baseLength = 50;
-  let baseWidth = 50;
+  let tailLength = 50;
+  let tailWidth = 50;
   let rotation = 0;
   let contraction = 0;
   let strokeWidth = 1;
@@ -12,14 +12,15 @@
   let peakCollapse = 0;
   let strokeLinejoin = "round";
   let peakLength = 0;
-  let scaleFactor = 100;
+  let scaleFactor = 1;
   let unclosed = false;
   let styleHeight = 100;
   let styleWidth = 100;
   let attributeDimensionsDisabled = false;
   let elementRotation = 0;
   let absPeakLengthEnabled = false;
-  let styleScale = 100;
+  let styleScale = 1;
+  let borderRadius = 0;
 
   function changeAngle(angle) {
     rotation = rotation + angle;
@@ -28,8 +29,8 @@
   function preset_1() {
     length = 750;
     width = 370;
-    baseLength = 58;
-    baseWidth = 100;
+    tailLength = 58;
+    tailWidth = 100;
     rotation = 0;
     contraction = 100;
     strokeWidth = 32;
@@ -42,8 +43,8 @@
   function preset_2() {
     length = 880;
     width = 430;
-    baseLength = 57;
-    baseWidth = 1;
+    tailLength = 57;
+    tailWidth = 1;
     rotation = 0;
     contraction = 100;
     strokeWidth = 100;
@@ -56,8 +57,8 @@
   function preset_3() {
     length = 880;
     width = 360;
-    baseLength = 0;
-    baseWidth = 100;
+    tailLength = 0;
+    tailWidth = 100;
     rotation = 0;
     contraction = 0;
     strokeWidth = 100;
@@ -70,8 +71,8 @@
   function preset_4() {
     length = 880;
     width = 310;
-    baseLength = 42;
-    baseWidth = 57;
+    tailLength = 42;
+    tailWidth = 57;
     rotation = 0;
     contraction = 0;
     strokeWidth = 63;
@@ -84,8 +85,8 @@
   function preset_5() {
     length = 670;
     width = 590;
-    baseLength = 50;
-    baseWidth = 50;
+    tailLength = 50;
+    tailWidth = 50;
     rotation = 0;
     contraction = 0;
     strokeWidth = 100;
@@ -98,8 +99,8 @@
   function preset_6() {
     length = 680;
     width = 490;
-    baseLength = 16;
-    baseWidth = 10;
+    tailLength = 16;
+    tailWidth = 10;
     rotation = 0;
     contraction = 0;
     strokeWidth = 30;
@@ -112,8 +113,8 @@
   function preset_7() {
     length = 880;
     width = 310;
-    baseLength = 97;
-    baseWidth = 64;
+    tailLength = 97;
+    tailWidth = 64;
     rotation = 0;
     contraction = 0;
     strokeWidth = 35;
@@ -126,8 +127,8 @@
   function preset_8() {
     length = 880;
     width = 310;
-    baseLength = 0;
-    baseWidth = 64;
+    tailLength = 0;
+    tailWidth = 64;
     rotation = 0;
     contraction = 0;
     strokeWidth = 35;
@@ -140,8 +141,8 @@
   function preset_9() {
     length = 600;
     width = 100;
-    baseLength = 100;
-    baseWidth = 100;
+    tailLength = 100;
+    tailWidth = 100;
     rotation = 0;
     contraction = 0;
     strokeWidth = 25;
@@ -154,8 +155,8 @@
   function preset_10() {
     length = 425;
     width = 350;
-    baseLength = 50;
-    baseWidth = 100;
+    tailLength = 50;
+    tailWidth = 100;
     rotation = 0;
     contraction = 0;
     strokeWidth = 1;
@@ -163,14 +164,14 @@
     strokeLinejoin = "round";
     styleWidth = 500;
     styleHeight = 400;
-    scaleFactor = 150;
+    scaleFactor = 1.5;
   }
 
   function preset_11() {
     length = 425;
     width = 350;
-    baseLength = 0;
-    baseWidth = 50;
+    tailLength = 0;
+    tailWidth = 50;
     rotation = 0;
     contraction = 0;
     strokeWidth = 1;
@@ -178,14 +179,14 @@
     strokeLinejoin = "round";
     styleWidth = 500;
     styleHeight = 400;
-    scaleFactor = 100;
+    scaleFactor = 1;
   }
 
   function preset_12() {
     length = 880;
     width = 310;
-    baseLength = 2;
-    baseWidth = 90;
+    tailLength = 2;
+    tailWidth = 90;
     rotation = 0;
     contraction = 0;
     strokeWidth = 20;
@@ -193,14 +194,14 @@
     strokeLinejoin = "round";
     styleWidth = 880;
     styleHeight = 310;
-    scaleFactor = 100;
+    scaleFactor = 1;
   }
 
   function reset() {
     length = 125;
     width = 125;
-    baseLength = 50;
-    baseWidth = 50;
+    tailLength = 50;
+    tailWidth = 50;
     rotation = 0;
     contraction = 0;
     strokeWidth = 1;
@@ -285,15 +286,15 @@
       </div>
 
       <div class="control">
-        base length
-        <input type="range" min="0" max="100" bind:value={baseLength} />
-        <input type="text" bind:value={baseLength} size="1" />
+        tail length
+        <input type="range" min="0" max="100" bind:value={tailLength} />
+        <input type="text" bind:value={tailLength} size="1" />
       </div>
 
       <div class="control">
-        base width
-        <input type="range" min="0" max="100" bind:value={baseWidth} />
-        <input type="text" bind:value={baseWidth} size="1" />
+        tail width
+        <input type="range" min="0" max="100" bind:value={tailWidth} />
+        <input type="text" bind:value={tailWidth} size="1" />
       </div>
 
       <div class="control">
@@ -310,7 +311,7 @@
       </div>
 
       <div class="control">
-        base contraction
+        tail contraction
         <input type="range" min="0" max="100" bind:value={contraction} />
         <input type="text" bind:value={contraction} size="1" />
       </div>
@@ -322,8 +323,8 @@
       </div>
 
       <div class="control">
-        scale %
-        <input type="range" min="0" max="200" bind:value={scaleFactor} />
+        scale
+        <input type="range" min="0" max="2" step=0.01 bind:value={scaleFactor} />
         <input type="text" bind:value={scaleFactor} size="1" />
       </div>
 
@@ -369,6 +370,12 @@
       </div>
 
       <div class="control control_style">
+        border radius
+        <input type="range" min=0 max=100 bind:value={borderRadius} />
+        <input type="text" bind:value={borderRadius} size="1" />
+      </div>
+
+      <div class="control control_style">
         rotation
         <input type="range" min=0 max=360 bind:value={elementRotation} />
         <input type="text" bind:value={elementRotation} size="1" />
@@ -376,7 +383,7 @@
 
       <div class="control control_style">
         scale
-        <input type="range" min=0 max=200 bind:value={styleScale} />
+        <input type="range" step=0.01 min=0 max=2 bind:value={styleScale} />
         <input type="text" bind:value={styleScale} size="1" />
       </div>
 
@@ -417,8 +424,8 @@
   <custom-arrow
     l={attributeDimensionsDisabled ? '' : length}
     w={attributeDimensionsDisabled ? '' : width}
-    tail-l={baseLength}
-    tail-w={baseWidth}
+    tail-l={tailLength}
+    tail-w={tailWidth}
     rot={rotation}
     tail-cont={contraction}
     peak-coll={peakCollapse}
@@ -426,7 +433,7 @@
     {unclosed}
     scale={scaleFactor}
     style="stroke-width: {strokeWidth}px; stroke-linejoin: {strokeLinejoin}; stroke: {strokeColor}; fill: {fillColor};
-    height: {styleHeight}px; width: {styleWidth}px; border-radius: 0%; transform: rotate({elementRotation}deg); transform:scale({styleScale/100},{styleScale/100}); background-color:{bgColor};">
+    height: {styleHeight}px; width: {styleWidth}px; border-radius: {borderRadius}%; transform: rotate({elementRotation}deg); transform:scale({styleScale},{styleScale}); background-color:{bgColor};">
   </custom-arrow>
 
 </main>
