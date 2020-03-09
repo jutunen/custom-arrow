@@ -66,7 +66,7 @@ class Customarrow extends HTMLElement {
       this.peakLength = parseFloat(newValue);
       console.log("peakLength: " + this.peakLength);
     } else if (name === "scale") {
-      this.scaleFactor = parseFloat(newValue) / 100;
+      this.scaleFactor = parseFloat(newValue);
       //console.log(this.peakLength);
     }
 
