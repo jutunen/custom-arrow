@@ -7,20 +7,21 @@
   let contraction = 0;
   let strokeWidth = 1;
   let strokeColor = "black";
-  let fillColor = "none";
+  let fillColor = "red";
   let peakCollapse = 0;
   let strokeLinejoin = "round";
   let peakLength = 0;
   let scaleFactor = 100;
-  let direction = "right";
   let unclosed = false;
   let styleHeight = 100;
   let styleWidth = 100;
-  let styleDimensions = true;
   let attributeDimensionsDisabled = false;
+  let elementRotation = 0;
+  let absPeakLengthEnabled = false;
+  let styleScale = 100;
 
-  function increaseAngle() {
-    rotation = rotation + 1;
+  function changeAngle(angle) {
+    rotation = rotation + angle;
   }
 
   function preset_1() {
@@ -33,6 +34,8 @@
     strokeWidth = 32;
     peakCollapse = 63;
     strokeLinejoin = "round";
+    styleWidth = 750;
+    styleHeight = 370;
   }
 
   function preset_2() {
@@ -45,6 +48,9 @@
     strokeWidth = 100;
     peakCollapse = 0;
     strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 430;
+
   }
 
   function preset_3() {
@@ -57,6 +63,8 @@
     strokeWidth = 100;
     peakCollapse = 100;
     strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 360;
   }
 
   function preset_4() {
@@ -69,6 +77,8 @@
     strokeWidth = 63;
     peakCollapse = 100;
     strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 310;
   }
 
   function preset_5() {
@@ -81,6 +91,8 @@
     strokeWidth = 100;
     peakCollapse = 0;
     strokeLinejoin = "round";
+    styleWidth = 670;
+    styleHeight = 590;
   }
 
   function preset_6() {
@@ -93,6 +105,8 @@
     strokeWidth = 30;
     peakCollapse = 100;
     strokeLinejoin = "round";
+    styleWidth = 680;
+    styleHeight = 490;
   }
 
   function preset_7() {
@@ -105,6 +119,8 @@
     strokeWidth = 35;
     peakCollapse = 100;
     strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 310;
   }
 
   function preset_8() {
@@ -117,6 +133,8 @@
     strokeWidth = 35;
     peakCollapse = 100;
     strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 310;
   }
 
   function preset_9() {
@@ -129,6 +147,53 @@
     strokeWidth = 25;
     peakCollapse = 0;
     strokeLinejoin = "round";
+    styleWidth = 600;
+    styleHeight = 100;
+  }
+
+  function preset_10() {
+    length = 425;
+    width = 350;
+    baseLength = 50;
+    baseWidth = 100;
+    rotation = 0;
+    contraction = 0;
+    strokeWidth = 1;
+    peakCollapse = 0;
+    strokeLinejoin = "round";
+    styleWidth = 500;
+    styleHeight = 400;
+    scaleFactor = 150;
+  }
+
+  function preset_11() {
+    length = 425;
+    width = 350;
+    baseLength = 0;
+    baseWidth = 50;
+    rotation = 0;
+    contraction = 0;
+    strokeWidth = 1;
+    peakCollapse = 0;
+    strokeLinejoin = "round";
+    styleWidth = 500;
+    styleHeight = 400;
+    scaleFactor = 100;
+  }
+
+  function preset_12() {
+    length = 880;
+    width = 310;
+    baseLength = 2;
+    baseWidth = 90;
+    rotation = 0;
+    contraction = 0;
+    strokeWidth = 20;
+    peakCollapse = 0;
+    strokeLinejoin = "round";
+    styleWidth = 880;
+    styleHeight = 310;
+    scaleFactor = 100;
   }
 
   function reset() {
@@ -144,6 +209,28 @@
     peakCollapse = 0;
     strokeLinejoin = "round";
   }
+
+  function handleAttributeDimensions(e) {
+    console.log(e.target.checked);
+    let el = document.getElementById("attribute_dimensions");
+    let i_1 = document.getElementById("1st");
+    let i_2 = document.getElementById("2nd");
+    let i_3 = document.getElementById("3rd");
+    let i_4 = document.getElementById("4th");
+    if(e.target.checked) {
+      el.style.opacity = 0.3;
+      i_1.disabled = true;
+      i_2.disabled = true;
+      i_3.disabled = true;
+      i_4.disabled = true;
+    } else {
+      el.style.opacity = 1;
+      i_1.disabled = false;
+      i_2.disabled = false;
+      i_3.disabled = false;
+      i_4.disabled = false;
+    }
+  }
 </script>
 
 <style>
@@ -157,6 +244,8 @@
     stroke-linecap: round;
     /*transform:rotate(90deg);*/
     display: inline-flex;
+    margin-left: 100px;
+    margin-bottom: 150px;
   }
   #container {
     border-radius: 50%;
@@ -192,10 +281,6 @@
     justify-content: center;
   }
 
-  #attribute_dimensions {
-    opacity: 0.3;
-  }
-
   button {
     display: block;
     margin: 10px;
@@ -209,21 +294,21 @@
       <div class="control control_title">Element attributes</div>
 
       <div class="control">
-        <input type="checkbox" bind:checked={attributeDimensionsDisabled} />
+        <input type="checkbox" on:change={handleAttributeDimensions} bind:checked={attributeDimensionsDisabled} />
         do not define length and width
       </div>
 
       <div id="attribute_dimensions">
         <div class="control">
           length
-          <input type="range" min="0" max="1000" bind:value={length} />
-          <input type="text" bind:value={length} size="1" />
+          <input id="1st" type="range" min="0" max="1000" bind:value={length} />
+          <input id="2nd" type="text" bind:value={length} size="1" />
         </div>
 
         <div class="control">
           width
-          <input type="range" min="0" max="1000" bind:value={width} />
-          <input type="text" bind:value={width} size="1" />
+          <input id="3rd" type="range" min="0" max="1000" bind:value={width} />
+          <input id="4th" type="text" bind:value={width} size="1" />
         </div>
       </div>
 
@@ -241,11 +326,12 @@
 
       <div class="control">
         rotation
-        <input type="range" min="-360" max="360" bind:value={rotation} />
+        <input type="range" min=-360 max=360 bind:value={rotation} />
         <input type="text" bind:value={rotation} size="1" />
       </div>
 
       <div class="control">
+        <input type="checkbox" bind:checked={absPeakLengthEnabled} />
         peak length
         <input type="range" min="0" max="200" bind:value={peakLength} />
         <input type="text" bind:value={peakLength} size="1" />
@@ -265,16 +351,6 @@
 
     </div>
     <div class="controls_half">
-
-      <div class="control">
-        direction
-        <select bind:value={direction}>
-          <option value="right">right</option>
-          <option value="left">left</option>
-          <option value="up">up</option>
-          <option value="down">down</option>
-        </select>
-      </div>
 
       <div class="control">
         scale %
@@ -316,18 +392,28 @@
         </select>
       </div>
 
-      <div id="styleDimensions">
-        <div class="control control_style">
-          height
-          <input type="range" min="0" max="500" bind:value={styleHeight} />
-          <input type="text" bind:value={styleHeight} size="1" />
-        </div>
+      <div class="control control_style">
+        rotation
+        <input type="range" min=0 max=360 bind:value={elementRotation} />
+        <input type="text" bind:value={elementRotation} size="1" />
+      </div>
 
-        <div class="control control_style">
-          width
-          <input type="range" min="0" max="500" bind:value={styleWidth} />
-          <input type="text" bind:value={styleWidth} size="1" />
-        </div>
+      <div class="control control_style">
+        scale
+        <input type="range" min=0 max=200 bind:value={styleScale} />
+        <input type="text" bind:value={styleScale} size="1" />
+      </div>
+
+      <div class="control control_style">
+        height
+        <input type="range" min="0" max="1000" bind:value={styleHeight} />
+        <input type="text" bind:value={styleHeight} size="1" />
+      </div>
+
+      <div class="control control_style">
+        width
+        <input type="range" min="0" max="1000" bind:value={styleWidth} />
+        <input type="text" bind:value={styleWidth} size="1" />
       </div>
 
     </div>
@@ -341,28 +427,30 @@
       <button type="button" on:click={preset_7}>Preset 7</button>
       <button type="button" on:click={preset_8}>Preset 8</button>
       <button type="button" on:click={preset_9}>Preset 9</button>
+      <button type="button" on:click={preset_10}>Preset 10</button>
+      <button type="button" on:click={preset_11}>Preset 11</button>
+      <button type="button" on:click={preset_12}>Preset 12</button>
       <button type="button" on:click={reset}>Reset</button>
-      <button type="button" on:click={increaseAngle}>+1</button>
+      <!--button type="button" on:click={() => changeAngle(1)}>+1</button>
+      <button type="button" on:click={() => changeAngle(-1)}>-1</button>
+      <button type="button" on:click={() => changeAngle(10)}>+10</button>
+      <button type="button" on:click={() => changeAngle(-10)}>-10</button-->
     </div>
   </div>
 
-  <p>This is text!</p>
-
   <custom-arrow
-    length={attributeDimensionsDisabled ? '' : length}
-    width={attributeDimensionsDisabled ? '' : width}
+    l={attributeDimensionsDisabled ? '' : length}
+    w={attributeDimensionsDisabled ? '' : width}
     tail-l={baseLength}
     tail-w={baseWidth}
     rot={rotation}
     tail-cont={contraction}
-    peak-collapse={peakCollapse}
-    peak-l={peakLength}
+    peak-coll={peakCollapse}
+    peak-l={absPeakLengthEnabled ? peakLength : ''}
     {unclosed}
     scale={scaleFactor}
-    {direction}
     style="stroke-width: {strokeWidth}px; stroke-linejoin: {strokeLinejoin}; stroke: {strokeColor}; fill: {fillColor};
-    height: {styleHeight}px; width: {styleWidth}px; border-radius: 0%;" />
-
-  <p>This is another text!</p>
+    height: {styleHeight}px; width: {styleWidth}px; border-radius: 0%; transform: rotate({elementRotation}deg); transform:scale({styleScale/100},{styleScale/100});">
+  </custom-arrow>
 
 </main>
