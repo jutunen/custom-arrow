@@ -146,7 +146,7 @@ class Customarrow extends HTMLElement {
 
     this.strokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth);
     let strokeWidthCompensation = this.strokeWidth * 0.5;
-    let strokeWidthFactorY = 1 - (strokeWidthCompensation) / (this.aWidth / 2);
+    let strokeWidthFactorY = 1 - strokeWidthCompensation / (this.aWidth / 2);
     let strokeWidthFactorX = 1 - (this.strokeWidth * this.tailLength) / this.aLength;
     let tailTopLeftY = strokeWidthCompensation + (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY;
     let tailBottomLeftY =
@@ -159,8 +159,8 @@ class Customarrow extends HTMLElement {
     let angle =
       Math.PI / 2 -
       Math.atan2(
-        this.tailWidth * (this.strokeWidth - 1) + this.aWidth / 2,
-        this.aLength - tailRightX + this.tailWidth * (this.strokeWidth - 1)
+        this.tailWidth * this.strokeWidth + this.aWidth / 2,
+        this.aLength - tailRightX + this.tailWidth * this.strokeWidth
       );
     let cathetus = Math.tan(angle) * tailTopRightY;
 
