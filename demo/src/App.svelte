@@ -1,4 +1,5 @@
 <script>
+
   let length = 125;
   let width = 125;
   let tailLength = 50;
@@ -7,19 +8,30 @@
   let contraction = 0;
   let strokeWidth = 1;
   let strokeColor = "#000000";
-  let fillColor = "#ff0000";
+  let fillColor = "#ffffff";
   let bgColor = "#d3d3d3";// "lightgray";
   let peakCollapse = 0;
   let strokeLinejoin = "round";
   let peakLength = 0;
   let scaleFactor = 1;
   let unclosed = false;
-  let styleHeight = 100;
-  let styleWidth = 100;
+  let styleHeight = 125;
+  let styleWidth = 125;
   let elementRotation = 0;
   let absPeakLengthEnabled = false;
   let styleScale = 1;
   let borderRadius = 0;
+
+  function saveToFile() {
+    let arrow = document.getElementById("thearrow")
+    arrow.arrow.style.fill = fillColor;
+    arrow.arrow.style.strokeWidth = strokeWidth;
+    arrow.arrow.style.strokeLinejoin = strokeLinejoin;
+    arrow.arrow.style.stroke = strokeColor;
+    arrow.arrow.style.strokeLinecap = "round";
+    let blob = new Blob([arrow.innerHTML], {type: "image/svg+xml;charset=utf-8"})
+    saveAs(blob, "arrow.svg")
+  }
 
   function changeAngle(angle) {
     rotation = rotation + angle;
@@ -35,174 +47,203 @@
   }
 
   function preset_1() {
-    length = 750;
-    width = 370;
-    tailLength = 58;
-    tailWidth = 100;
+    length = 250;
+    width = 150;
+    tailLength = 50;
+    tailWidth = 50;
     rotation = 0;
-    contraction = 100;
-    strokeWidth = 32;
-    peakCollapse = 63;
+    contraction = 80;
+    strokeWidth = 5;
+    peakCollapse = 50;
     strokeLinejoin = "round";
-    styleWidth = 750;
-    styleHeight = 370;
+    styleWidth = 250;
+    styleHeight = 150;
+    scaleFactor = 1;
+    fillColor = "#ff0000";
+    unclosed = false;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_2() {
-    length = 880;
-    width = 430;
-    tailLength = 57;
-    tailWidth = 1;
-    rotation = 0;
-    contraction = 100;
-    strokeWidth = 100;
-    peakCollapse = 0;
+    length = 250;
+    width = 100;
+    rotation = 180;
+    tailLength = 70;
+    tailWidth = 2;
+    contraction = 0;
+    strokeWidth = 7;
+    peakCollapse = 100;
     strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 430;
+    styleWidth = 250;
+    styleHeight = 100;
+    scaleFactor = 1;
+    fillColor = "#ff0000";
+    unclosed = false;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_3() {
-    length = 880;
-    width = 360;
-    tailLength = 0;
-    tailWidth = 100;
-    rotation = 0;
+    length = 150;
+    width = 150;
+    rotation = 270;
+    tailLength = 55;
+    tailWidth = 40;
     contraction = 0;
-    strokeWidth = 100;
-    peakCollapse = 100;
+    strokeWidth = 15;
+    peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 360;
+    styleWidth = 150;
+    styleHeight = 150;
+    scaleFactor = 1;
+    fillColor = "#00ccff";
+    unclosed = false;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_4() {
-    length = 880;
-    width = 310;
-    tailLength = 42;
-    tailWidth = 57;
+    length = 300;
+    width = 150;
     rotation = 0;
+    tailLength = 55;
+    tailWidth = 40;
     contraction = 0;
-    strokeWidth = 63;
+    strokeWidth = 5;
     peakCollapse = 100;
     strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 310;
+    styleWidth = 300;
+    styleHeight = 150;
+    scaleFactor = 1;
+    fillColor = "none";
+    unclosed = true;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_5() {
-    length = 670;
-    width = 590;
+    length = 300;
+    width = 150;
+    rotation = 180;
     tailLength = 50;
-    tailWidth = 50;
-    rotation = 0;
-    contraction = 0;
-    strokeWidth = 100;
+    tailWidth = 100;
+    contraction = 100;
+    strokeWidth = 5;
     peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 670;
-    styleHeight = 590;
+    styleWidth = 300;
+    styleHeight = 150;
+    scaleFactor = 1;
+    fillColor = "#000000";
+    unclosed = false;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_6() {
-    length = 680;
-    width = 490;
-    tailLength = 16;
-    tailWidth = 10;
+    length = 300;
+    width = 150;
     rotation = 0;
+    tailLength = 80;
+    tailWidth = 100;
     contraction = 0;
-    strokeWidth = 30;
-    peakCollapse = 100;
+    strokeWidth = 0;
+    peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 680;
-    styleHeight = 490;
+    styleWidth = 300;
+    styleHeight = 150;
+    scaleFactor = 1;
+    fillColor = "#00ff00";
+    unclosed = false;
+    borderRadius = 0;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_7() {
-    length = 880;
-    width = 310;
-    tailLength = 97;
-    tailWidth = 64;
-    rotation = 0;
+    length = 200;
+    width = 200;
+    rotation = 45;
+    tailLength = 50;
+    tailWidth = 50;
     contraction = 0;
-    strokeWidth = 35;
-    peakCollapse = 100;
+    strokeWidth = 0;
+    peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 310;
+    styleWidth = 200;
+    styleHeight = 200;
+    scaleFactor = 1;
+    fillColor = "#ff0000";
+    unclosed = false;
+    borderRadius = 100;
+    bgColor = "#d3d3d3";
+    strokeLinejoin = "round";
   }
 
   function preset_8() {
-    length = 880;
-    width = 310;
-    tailLength = 0;
-    tailWidth = 64;
-    rotation = 0;
+    length = 350;
+    width = 180;
+    rotation = 315;
+    tailLength = 6;
+    tailWidth = 0;
     contraction = 0;
-    strokeWidth = 35;
-    peakCollapse = 100;
+    strokeWidth = 0;
+    peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 310;
+    styleWidth = 200;
+    styleHeight = 200;
+    scaleFactor = 0.5;
+    fillColor = "#00ff00";
+    unclosed = false;
+    borderRadius = 100;
+    bgColor = "#d3d3d3";
+    strokeLinejoin = "round";
   }
 
   function preset_9() {
-    length = 600;
-    width = 100;
-    tailLength = 100;
-    tailWidth = 100;
-    rotation = 0;
+    length = 350;
+    width = 180;
+    rotation = 90;
+    tailLength = 6;
+    tailWidth = 0;
     contraction = 0;
-    strokeWidth = 25;
+    strokeWidth = 0;
     peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 600;
-    styleHeight = 100;
+    styleWidth = 200;
+    styleHeight = 200;
+    scaleFactor = 0.5;
+    fillColor = "#000000";
+    unclosed = false;
+    borderRadius = 100;
+    bgColor = "#ffffff";
+    strokeLinejoin = "round";
   }
 
   function preset_10() {
-    length = 425;
-    width = 350;
+    length = 350;
+    width = 140;
+    rotation = 0;
     tailLength = 50;
-    tailWidth = 100;
-    rotation = 0;
-    contraction = 0;
-    strokeWidth = 1;
-    peakCollapse = 0;
-    strokeLinejoin = "round";
-    styleWidth = 500;
-    styleHeight = 400;
-    scaleFactor = 1.5;
-  }
-
-  function preset_11() {
-    length = 425;
-    width = 350;
-    tailLength = 0;
     tailWidth = 50;
-    rotation = 0;
     contraction = 0;
-    strokeWidth = 1;
+    strokeWidth = 22;
     peakCollapse = 0;
     strokeLinejoin = "round";
-    styleWidth = 500;
-    styleHeight = 400;
+    styleWidth = 350;
+    styleHeight = 140;
     scaleFactor = 1;
-  }
-
-  function preset_12() {
-    length = 880;
-    width = 310;
-    tailLength = 2;
-    tailWidth = 90;
-    rotation = 0;
-    contraction = 0;
-    strokeWidth = 20;
-    peakCollapse = 0;
-    strokeLinejoin = "round";
-    styleWidth = 880;
-    styleHeight = 310;
-    scaleFactor = 1;
+    fillColor = "#ffffff";
+    unclosed = false;
+    borderRadius = 100;
+    bgColor = "#ffffff";
+    strokeLinejoin = "bevel";
   }
 
   function reset() {
@@ -213,10 +254,20 @@
     rotation = 0;
     contraction = 0;
     strokeWidth = 1;
-    strokeColor = "black";
-    fillColor = "none";
+    strokeColor = "#000000";
+    fillColor = "#ffffff";
+    bgColor = "#d3d3d3";// "lightgray";
     peakCollapse = 0;
     strokeLinejoin = "round";
+    peakLength = 0;
+    scaleFactor = 1;
+    unclosed = false;
+    styleHeight = 125;
+    styleWidth = 125;
+    elementRotation = 0;
+    absPeakLengthEnabled = false;
+    styleScale = 1;
+    borderRadius = 0;
   }
 
 </script>
@@ -225,6 +276,9 @@
 
   main {
     font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .html_example {
@@ -233,6 +287,7 @@
     display:inline-block;
     background-color: #d8edf3;
     padding: 10px;
+    margin-top: 20px;
   }
 
   .bold_text {
@@ -296,15 +351,53 @@
     display: block;
     margin: 10px;
   }
-  .custom_container{
+  .custom_container, #save_button_container{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+  }
+  #save_button{
+    margin-bottom: 5px;
+  }
+  #save_note{
+    font-size: 14px;
+  }
+  #title {
+    background-color: #ebf6f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    box-shadow: 4px 4px 4px lightgrey;
+    margin-bottom: 15px;
+    width: 700px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  #description {
+    font-size: 18px;
+    font-style: italic;
+    margin: 12px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #footer {
+    margin: 30px;
+    margin-top:50px;
   }
 </style>
 
 <main>
+  <div id="description">
+    custom-arrow web component is available from&nbsp;<a href="https://github.com/jutunen/custom-arrow" target="_blank">GitHub</a>&nbsp;and&nbsp;<a href="https://www.npmjs.com/package/custom-arrow" target="_blank"> NPM registry</a>
+  </div>
+  <div id="title">
+    custom-arrow demo
+  </div>
   <div class="controls_container">
     <div class="controls_half">
 
@@ -473,13 +566,12 @@
       <button type="button" on:click={preset_8}>Preset 8</button>
       <button type="button" on:click={preset_9}>Preset 9</button>
       <button type="button" on:click={preset_10}>Preset 10</button>
-      <button type="button" on:click={preset_11}>Preset 11</button>
-      <button type="button" on:click={preset_12}>Preset 12</button>
       <button type="button" on:click={reset}>Reset</button>
     </div>
   </div>
   <div class="custom_container">
     <custom-arrow
+      id="thearrow"
       l={length}
       w={width}
       tail-l={tailLength}
@@ -494,11 +586,22 @@
       height: {styleHeight}px; width: {styleWidth}px; border-radius: {borderRadius}%; transform: rotate({elementRotation}deg); transform:scale({styleScale},{styleScale}); background-color:{bgColor};">
     </custom-arrow>
 
+    <div id="save_button_container">
+      <button id="save_button" type="button" on:click={saveToFile}>Save to file as an SVG image</button>
+      <div id="save_note">
+      (Saves only the arrow and ignores rotation)
+      </div>
+    </div>
+
     <div class="html_example">
     <div class="bold_text">HTML tag with all attributes:</div>
       {`<custom-arrow l=${length} w=${width} tail-l=${tailLength} tail-w=${tailWidth} rot=${rotation} tail-cont=${contraction}`}
     <br>
       {`peak-coll=${peakCollapse} peak-l=${absPeakLengthEnabled ? peakLength : '""'} unclosed=${unclosed} scale=${scaleFactor}> </custom-arrow>`}
     </div>
+  </div>
+
+  <div id="footer">
+    this page was made with &heartsuit; and  <a href="https://svelte.dev/" target="_blank">Svelte</a>
   </div>
 </main>
