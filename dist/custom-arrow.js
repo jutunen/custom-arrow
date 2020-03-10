@@ -3,7 +3,7 @@ class Customarrow extends HTMLElement {
     super();
     this.tailWidth = 0.5;
     this.tailLength = 0.5;
-    this.rotation = 0;
+    this.arrowRotation = 0;
     this.tailContraction = 0;
     this.peakCollapse = 0;
     this.unClosed = false;
@@ -46,9 +46,9 @@ class Customarrow extends HTMLElement {
     } else if (name === "rot") {
       let rot = parseFloat(newValue);
       if (!isNaN(rot)) {
-        this.rotation = rot < 0 ? rot + 360 : rot;
+        this.arrowRotation = rot < 0 ? rot + 360 : rot;
       } else {
-        this.rotation = 0;
+        this.arrowRotation = 0;
       }
     } else if (name === "tail-cont") {
       this.tailContraction = parseFloat(newValue) / 100;
@@ -117,7 +117,7 @@ class Customarrow extends HTMLElement {
 
   _setStyle() {
 
-    this.arrow.style.transform = "rotate(" + this.rotation + "deg)";
+    this.arrow.style.transform = "rotate(" + this.arrowRotation + "deg)";
     //this.arrow.style.transformOrigin = "0% 50%";
     this.arrow.style.position = "absolute";
     let styleDisplay = window.getComputedStyle(this).display;
@@ -130,10 +130,10 @@ class Customarrow extends HTMLElement {
 
   _generateArrow() {
 
-    this.strokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth);
-    let strokeWidthCompensation = this.strokeWidth * 0.5;
+    this.svgStrokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth);
+    let strokeWidthCompensation = this.svgStrokeWidth * 0.5;
     let strokeWidthFactorY = 1 - strokeWidthCompensation / (this.aWidth / 2);
-    let strokeWidthFactorX = 1 - (this.strokeWidth * this.tailLength) / this.aLength;
+    let strokeWidthFactorX = 1 - (this.svgStrokeWidth * this.tailLength) / this.aLength;
     let tailTopLeftY = strokeWidthCompensation + (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY;
     let tailBottomLeftY =
       this.aWidth - (this.aWidth / 2) * (1 - this.tailWidth) * strokeWidthFactorY - strokeWidthCompensation;
@@ -145,14 +145,14 @@ class Customarrow extends HTMLElement {
     let angle =
       Math.PI / 2 -
       Math.atan2(
-        this.tailWidth * this.strokeWidth + this.aWidth / 2,
-        this.aLength - tailRightX + this.tailWidth * this.strokeWidth
+        this.tailWidth * this.svgStrokeWidth + this.aWidth / 2,
+        this.aLength - tailRightX + this.tailWidth * this.svgStrokeWidth
       );
     let cathetus = Math.tan(angle) * tailTopRightY;
 
     let coord_1_x = strokeWidthCompensation;
     let coord_1_y = tailTopLeftY;
-    let coord_2_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.strokeWidth);
+    let coord_2_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.svgStrokeWidth);
     let coord_2_y = tailTopRightY;
     let coord_3_x = tailRightX + strokeWidthCompensation;
     let coord_3_y = strokeWidthCompensation;
@@ -160,7 +160,7 @@ class Customarrow extends HTMLElement {
     let coord_4_y = this.aWidth / 2;
     let coord_5_x = tailRightX + strokeWidthCompensation;
     let coord_5_y = this.aWidth - strokeWidthCompensation;
-    let coord_6_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.strokeWidth);
+    let coord_6_x = tailRightX + strokeWidthCompensation + this.peakCollapse * (cathetus - this.svgStrokeWidth);
     let coord_6_y = tailBottomRightY;
     let coord_7_x = strokeWidthCompensation;
     let coord_7_y = tailBottomLeftY;
