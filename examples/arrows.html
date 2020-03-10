@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="../dist/custom-arrow.js"></script>
+    </head>
+    <style>
+        custom-arrow {
+          display:inline-flex;
+          stroke-width: 5px;
+      		stroke: black;
+      		fill: none;
+          height: 250px;
+          width: 250px;
+          stroke-linejoin: round;
+          background-color: lightgray;
+        }
+    </style>
+    <body>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=0> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=50> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=100> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=0 unclosed> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=50 unclosed> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=100 unclosed> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=100 unclosed=false> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=100 rot=-45> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 peak-coll=100 rot=45> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 tail-cont=33 peak-coll=0> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 tail-cont=67 peak-coll=50> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-w=40 tail-cont=100 peak-coll=100> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-l=30 tail-w=40 peak-coll=0> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-l=30 tail-w=40 peak-coll=50> </custom-arrow>
+      <custom-arrow l=150 w=150 tail-l=30 tail-w=40 peak-coll=100> </custom-arrow>
+      <custom-arrow l=150 w=150 peak-l=30 tail-l=30 tail-w=40 peak-coll=0> </custom-arrow>
+      <custom-arrow l=150 w=150 peak-l=30 tail-l=30 tail-w=40 peak-coll=50> </custom-arrow>
+      <custom-arrow l=150 w=150 peak-l=30 tail-l=30 tail-w=40 peak-coll=100> </custom-arrow>
+      <custom-arrow scale=0.8 l=150 w=150 tail-w=40 peak-coll=0> </custom-arrow>
+      <custom-arrow scale=1.2 l=150 w=150 tail-w=40 peak-coll=50> </custom-arrow>
+      <custom-arrow scale=1.6 l=150 w=150 tail-w=40 peak-coll=100> </custom-arrow>
+    </body>
+</html>
