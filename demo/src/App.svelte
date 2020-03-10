@@ -286,7 +286,7 @@
     font-stretch: extra-expanded;
     display:inline-block;
     background-color: #d8edf3;
-    padding: 10px;
+    padding: 20px;
     margin-top: 20px;
   }
 
