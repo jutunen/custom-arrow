@@ -1,0 +1,32 @@
+{
+  "name": "custom-arrow",
+  "version": "0.0.1",
+  "description": "A web component for creating custom arrow HTML elements.",
+  "main": "dist/custom-arrow-node.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist/custom-arrow-node.min.js",
+    "dist/custom-arrow-node.js",
+    "dist/minify.cmd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jutunen/custom-arrow.git"
+  },
+  "keywords": [
+    "web-component",
+    "custom-element",
+    "html",
+    "javascript",
+    "arrow",
+    "arrows"
+  ],
+  "author": "Jussi Utunen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jutunen/custom-arrow/issues"
+  },
+  "homepage": "https://github.com/jutunen/custom-arrow#readme"
+}
