@@ -1,5 +1,7 @@
 <script>
 
+  import 'custom-arrow';
+
   let length = 400;
   let width = 125;
   let tailLength = 50;
