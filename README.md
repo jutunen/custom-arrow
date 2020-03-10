@@ -1,9 +1,11 @@
 # custom-arrow
 A web component for creating custom arrow HTML elements.
 
-Component's custom attributes and CSS style together enable forming of varying arrow figures.
+Component's custom attributes and CSS style together enable forming of various arrow figures.
 
 Custom-arrow is a standalone vanilla JS web component that does not use shadow DOM.
+
+Live demo available [here.](http://51.38.51.120/customarrow/)
 
 ## Including the component to an HTML file
 
@@ -26,8 +28,8 @@ Custom-arrow is a standalone vanilla JS web component that does not use shadow D
          l=150 w=150 tail-w=40 peak-coll=50> 
        </custom-arrow>  
     ```
-    
-    ## Including the component from NPM
+   
+## Including the component from NPM
 
 1. Install and import polyfill, this is not needed for modern browsers:
 
