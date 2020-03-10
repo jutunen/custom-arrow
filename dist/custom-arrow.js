@@ -14,7 +14,7 @@ class Customarrow extends HTMLElement {
   static get observedAttributes() {
     return [
       "l",
-      "w", // <-- width on varattu!
+      "w",
       "tail-l",
       "tail-w",
       "peak-l",
@@ -27,17 +27,17 @@ class Customarrow extends HTMLElement {
   }
 
   disconnectedCallback() {
+
     this.removeChild(this.querySelector("svg"));
     this.observer.disconnect();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
+
     if (name === "w") {
-      //console.log("width:" + newValue);
-      this.aWidth = parseFloat(newValue); //vai Number?
+      this.aWidth = parseFloat(newValue);
     } else if (name === "l") {
-      //console.log("length:" + newValue);
-      this.aLength = parseFloat(newValue); //vai Number?
+      this.aLength = parseFloat(newValue);
     } else if (name === "tail-w") {
       this.tailWidth = parseFloat(newValue) / 100;
     } else if (name === "tail-l") {
@@ -54,9 +54,7 @@ class Customarrow extends HTMLElement {
       this.tailContraction = parseFloat(newValue) / 100;
     } else if (name === "peak-coll") {
       this.peakCollapse = parseFloat(newValue) / 100;
-      console.log(this.peakCollapse);
     } else if (name === "unclosed") {
-      console.log(typeof newValue);
       if (newValue === "false") {
         this.unClosed = false;
       } else {
@@ -64,10 +62,8 @@ class Customarrow extends HTMLElement {
       }
     } else if (name === "peak-l") {
       this.peakLength = parseFloat(newValue);
-      console.log("peakLength: " + this.peakLength);
     } else if (name === "scale") {
       this.scaleFactor = parseFloat(newValue);
-      //console.log(this.peakLength);
     }
 
     if (!isNaN(this.peakLength)) {
@@ -85,12 +81,14 @@ class Customarrow extends HTMLElement {
   }
 
   _render() {
+
     this.appendChild(this._generateArrow());
     this.arrow = this.querySelector("#arrow");
     this._setStyle();
   }
 
   connectedCallback() {
+
     this._render();
 
     // Options for the observer (which mutations to observe)
@@ -103,7 +101,6 @@ class Customarrow extends HTMLElement {
           if (
             ctx.strokeWidth !== parseFloat(window.getComputedStyle(ctx).strokeWidth)
           ) {
-            console.log("re-rendering");
             ctx.removeChild(ctx.querySelector("svg"));
             ctx._render();
           }
@@ -119,13 +116,12 @@ class Customarrow extends HTMLElement {
   }
 
   _setStyle() {
+
     this.arrow.style.transform = "rotate(" + this.rotation + "deg)";
     //this.arrow.style.transformOrigin = "0% 50%";
     this.arrow.style.position = "absolute";
     let styleDisplay = window.getComputedStyle(this).display;
-    //console.log(styleDisplay);
     if (styleDisplay !== "flex" && styleDisplay !== "inline-flex") {
-      //console.log("Setting display style");
       this.style.display = "flex";
     }
     this.style.justifyContent = "center";
