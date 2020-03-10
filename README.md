@@ -57,3 +57,15 @@ Live demo available [here.](http://51.38.51.120/customarrow/)
    arrow.setAttribute("peak-coll", "50")
    document.body.appendChild(menu)
    ```
+
+## Usage example
+
+Take a look at file arrow.html in examples folder
+
+## License
+
+Copyright (c) 2020 Jussi Utunen
+
+Licensed under the MIT License
+
+# Better documentation coming soon!
