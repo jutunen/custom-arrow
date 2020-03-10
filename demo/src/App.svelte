@@ -1,12 +1,12 @@
 <script>
 
-  let length = 125;
+  let length = 400;
   let width = 125;
   let tailLength = 50;
   let tailWidth = 50;
   let rotation = 0;
   let contraction = 0;
-  let strokeWidth = 1;
+  let strokeWidth = 5;
   let strokeColor = "#000000";
   let fillColor = "#ffffff";
   let bgColor = "#d3d3d3";// "lightgray";
@@ -16,7 +16,7 @@
   let scaleFactor = 1;
   let unclosed = false;
   let styleHeight = 125;
-  let styleWidth = 125;
+  let styleWidth = 400;
   let elementRotation = 0;
   let absPeakLengthEnabled = false;
   let styleScale = 1;
@@ -247,13 +247,13 @@
   }
 
   function reset() {
-    length = 125;
+    length = 400;
     width = 125;
     tailLength = 50;
     tailWidth = 50;
     rotation = 0;
     contraction = 0;
-    strokeWidth = 1;
+    strokeWidth = 5;
     strokeColor = "#000000";
     fillColor = "#ffffff";
     bgColor = "#d3d3d3";// "lightgray";
@@ -263,7 +263,7 @@
     scaleFactor = 1;
     unclosed = false;
     styleHeight = 125;
-    styleWidth = 125;
+    styleWidth = 400;
     elementRotation = 0;
     absPeakLengthEnabled = false;
     styleScale = 1;
@@ -401,7 +401,7 @@
   <div class="controls_container">
     <div class="controls_half">
 
-      <div class="control control_title">Element attributes</div>
+      <div class="control control_title">Custom attributes</div>
 
       <div class="control">
         arrow length
@@ -594,7 +594,7 @@
     </div>
 
     <div class="html_example">
-    <div class="bold_text">HTML tag with all attributes:</div>
+    <div class="bold_text">HTML tag with all custom attributes:</div>
       {`<custom-arrow l=${length} w=${width} tail-l=${tailLength} tail-w=${tailWidth} rot=${rotation} tail-cont=${contraction}`}
     <br>
       {`peak-coll=${peakCollapse} peak-l=${absPeakLengthEnabled ? peakLength : '""'} unclosed=${unclosed} scale=${scaleFactor}> </custom-arrow>`}
