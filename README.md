@@ -1,3 +1,4 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/custom-arrow)
 [![npm version](https://badge.fury.io/js/custom-arrow.svg)](https://badge.fury.io/js/custom-arrow)
 [![minified](https://badgen.net/badge/minified/2.8%20kB/blue)](https://badgen.net/badge/minified/2.8%20kB/blue)
 [![minified & compressed](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)
