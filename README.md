@@ -202,6 +202,12 @@ HTML example:
 ```html
 <custom-arrow l=100 w=100 scale=0.5> </custom-arrow>
 ```
+## Display style
+
+Element display style should be set to flex or inline-flex.
+
+When the element renders itself, it sets its display style to flex, if the style is not flex or inline-flex.
+
 ## Usage example
 
 Take a look at file arrow.html in examples folder
