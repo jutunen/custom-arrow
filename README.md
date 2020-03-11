@@ -143,6 +143,7 @@ HTML example:
 Defines tail contraction with a proportional value from 0 to 100.
 
 0 = no contraction at all
+
 100 = complete contraction
 
 Default value is 0.
@@ -158,6 +159,7 @@ HTML example:
 Defines peak collapse with a proportional value from 0 to 100.
 
 0 = no collapse at all
+
 100 = complete collapse
 
 Default value is 0.
