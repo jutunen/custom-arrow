@@ -3,6 +3,8 @@
 [![minified](https://badgen.net/badge/minified/2.8%20kB/blue)](https://badgen.net/badge/minified/2.8%20kB/blue)
 [![minified & compressed](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)
 
+# Note! This project has been migrated to https://github.com/vanillawc/wc-arrow. Custom-arrow won't be maintained anymore. Please use wc-arrow instead.
+
 # custom-arrow
 A web component for creating custom arrow HTML elements.
 
