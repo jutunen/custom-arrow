@@ -29,18 +29,18 @@ Live demo available [here.](http://51.38.51.120/customarrow/)
 3. Start using it!
 
     ```html
-       <custom-arrow 
-         l=150 w=150 tail-w=40 peak-coll=50> 
+       <custom-arrow
+         l=150 w=150 tail-w=40 peak-coll=50>
        </custom-arrow>  
     ```
-   
+
 ## Including the component from NPM
 
 1. Install and import polyfill, this is not needed for modern browsers:
 
    See https://www.npmjs.com/package/@webcomponents/custom-elements
 
-2. Install custom-menu-wrapper NPM package:
+2. Install custom-arrow NPM package:
 
     ```console
     npm i custom-arrow
