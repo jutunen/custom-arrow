@@ -66,9 +66,9 @@ Live demo available [here.](http://51.38.51.120/wc-arrow/)
    ```
 ## Display style
 
-Element display style should be set to flex or inline-flex.
+Element display style can be set to flex, inline-flex or none.
 
-When the element renders itself, it sets its display style to flex, if the style is not flex or inline-flex.
+When the element renders itself, it sets its display style to flex, if the style is not flex, inline-flex or none.
 
 ## Attributes
 
