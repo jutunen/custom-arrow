@@ -1,7 +1,3 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/custom-arrow)
-[![npm version](https://badge.fury.io/js/custom-arrow.svg)](https://badge.fury.io/js/custom-arrow)
-[![minified](https://badgen.net/badge/minified/2.8%20kB/blue)](https://badgen.net/badge/minified/2.8%20kB/blue)
-[![minified & compressed](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)](https://badgen.net/badge/minified%20&%20compressed/1.5%20kB/blue)
 
 # Note! This project has been migrated to https://github.com/vanillawc/wc-arrow. Custom-arrow won't be maintained anymore. Please use wc-arrow instead.
 
@@ -34,34 +30,6 @@ Custom-arrow is a standalone vanilla JS web component that does not use shadow D
        </custom-arrow>  
     ```
 
-## Including the component from NPM
-
-1. Install and import polyfill, this is not needed for modern browsers:
-
-   See https://www.npmjs.com/package/@webcomponents/custom-elements
-
-2. Install custom-arrow NPM package:
-
-    ```console
-    npm i custom-arrow
-    ```
-
-3. Import custom element:
-
-    ```javascript
-    import 'custom-arrow'
-    ```
-
-4. Start using it:
-
-   ```javascript
-   var arrow = document.createElement('custom-arrow')
-   arrow.setAttribute("l", "150")
-   arrow.setAttribute("w", "150")
-   arrow.setAttribute("tail-w", "40")
-   arrow.setAttribute("peak-coll", "50")
-   document.body.appendChild(menu)
-   ```
 ## Display style
 
 Element display style can be set to flex, inline-flex or none.
